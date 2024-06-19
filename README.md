@@ -6,12 +6,13 @@ This project is still very much in early stages of construction.
 
 ## Features
 
-- User Registration and Login (with options for Google and Facebook login)
-- Profile Management
-- Matching Algorithm
-- Messaging System
-- Privacy Settings
-- Event-Based Dating
+- User Registration ❌
+- User Login (with options for Google and Facebook login) ✅
+- Profile Management ❌
+- Matching Algorithm ❌
+- Messaging System ❌
+- Privacy Settings ❌
+- Event-Based Dating ❌
 
 ## Requirements
 
