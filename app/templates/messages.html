@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="main-container">
+    <div class="container">
+        <h2>Message Center</h2>
+        <p>Send and receive messages.</p>
+        <!-- message communication goes here -->
+    </div>
+</div>
+
+<div class="message-container">
+{% if messages %}
+{% for message in messages %}
+    <div class="container">
+        <p>{{ message.author.username }} says:</p>
+        <p>{{ message.body }}</p>
+    </div>
+{% endfor %}
+{% else %}
+    <div>
+        <p>No messages.</p>
+    </div>
+{% endif %}
+</div>
+
+{% endblock %}
+

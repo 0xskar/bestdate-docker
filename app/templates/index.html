@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="main-container">
+    <div class="container">
+        <h2>Welcome to Soulmate!</h2>
+        <p>Find your perfect match today.</p>
+        <a href="#" class="get-started-btn">Get Started</a>
+    </div>
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+{% endblock %}
