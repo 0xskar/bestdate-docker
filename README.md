@@ -6,7 +6,7 @@ This project is still very much in early stages of construction.
 
 ## Features
 
-- User Registration ❌
+- User Registration ✅
 - User Login (with options for Google and Facebook login) ✅
 - Profile Management ❌
 - Matching Algorithm ❌
