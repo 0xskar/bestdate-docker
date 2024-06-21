@@ -3,23 +3,95 @@
 {% block content %}
 <div class="main-container">
     <h2>Register</h2>
-    <form method="POST" action="">
+    <form method="POST" action="" class="registration-form">
         {{ form.hidden_tag() }}
-        <div>
-            {{ form.username.label }} {{ form.username(size=32) }}
+        
+        <div class="form-group">
+            {{ form.username.label(class_='form-label') }}
+            {{ form.username(class_='form-input', size=32) }}
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </div>
-        <div>
-            {{ form.email.label }} {{ form.email(size=32) }}
+        
+        <div class="form-group">
+            {{ form.email.label(class_='form-label') }}
+            {{ form.email(class_='form-input', size=32) }}
+            {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </div>
-        <div>
-            {{ form.password.label }} {{ form.password(size=32) }}
+        
+        <div class="form-group">
+            {{ form.password.label(class_='form-label') }}
+            {{ form.password(class_='form-input', size=32) }}
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </div>
-        <div>
-            {{ form.confirm_password.label }} {{ form.confirm_password(size=32) }}
+        
+        <div class="form-group">
+            {{ form.confirm_password.label(class_='form-label') }}
+            {{ form.confirm_password(class_='form-input', size=32) }}
+            {% for error in form.confirm_password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </div>
-        <div>
+        
+        <div class="form-group">
+            {{ form.first_name.label(class_='form-label') }}
+            {{ form.first_name(class_='form-input', size=32) }}
+            {% for error in form.first_name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.last_name.label(class_='form-label') }}
+            {{ form.last_name(class_='form-input', size=32) }}
+            {% for error in form.last_name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+                
+        <div class="form-group">
+            {{ form.date_of_birth.label(class_='form-label') }}
+            {{ form.date_of_birth(class_='form-input') }}
+            {% for error in form.date_of_birth.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.gender.label(class_='form-label') }}
+            {{ form.gender(class_='form-input') }}
+            {% for error in form.gender.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+                
+        <div class="form-group">
+            {{ form.location.label(class_='form-label') }}
+            {{ form.location(class_='form-input', size=32) }}
+            {% for error in form.location.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        
+        <!-- Flash messages block -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+                <div class="alert alert-danger"><span style="color: red;">{{ message }}</span></div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+        <div class="form-group">
             {{ form.submit(class_="btn") }}
         </div>
     </form>
 </div>
+<div class="content-container"></div>
 {% endblock %}

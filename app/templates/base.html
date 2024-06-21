@@ -13,15 +13,15 @@
 <body>
     <nav>
         <div class="container">
-            <h1><a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/soulmate-300x90.png') }}" alt="BestDate"></a></h1>
+            <h1><a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/soulmate-300x90.png') }}" alt="BestDate"></a></h1>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
-            {% if loggedIn %}
+            {% if current_user.is_authenticated %}
             <ul class="nav no-search" id="nav-menu">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
                 <li><a href="{{ url_for('profile') }}">Profile</a></li>
                 <li><a href="{{ url_for('matches') }}">Matches</a></li>
                 <li><a href="{{ url_for('messages') }}">Messages</a></li>

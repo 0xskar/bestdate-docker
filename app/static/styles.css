@@ -80,6 +80,13 @@ nav ul li a:hover {
     margin: auto;
 }
 
+.content-container {
+    background: #fff;
+    color: #333;
+    padding: 2rem 0 8rem;
+    text-align: center;
+}
+
 .message-container {
     padding: 2rem 0;
 }
@@ -166,6 +173,15 @@ footer .container {
 
 .login-form {
     max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.registration-form {
+    max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
     background: #fff;

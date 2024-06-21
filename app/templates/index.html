@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+{% if current_user.is_authenticated %}
 <div class="main-container">
     <div class="container">
-        <h2>Welcome to Soulmate!</h2>
+        <h2>Welcome, {{ current_user.first_name }}!</h2>
         <p>Find your perfect match today.</p>
         <a href="#" class="get-started-btn">Get Started</a>
     </div>
 </div>
+{% else %}
+<div class="main-container">
+    <div class="container">
+        <h2>Welcome to Soulmate!</h2>
+        <p>Find your perfect match today.</p>
+        <a href="{{ url_for('register') }}" class="get-started-btn">Get Started</a>
+    </div>
+</div>
+{% endif %}
 
 {% with messages = get_flashed_messages() %}
 {% if messages %}

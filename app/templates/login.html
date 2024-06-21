@@ -23,9 +23,20 @@
             {{ form.remember_me(class_='form-checkbox') }}
             {{ form.remember_me.label(class_='form-checkbox-label') }}
         </div>
+        <!-- Flash messages block -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+                <div class="alert alert-danger"><span style="color: red;">{{ message }}</span></div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
         <div class="form-group">
             {{ form.submit(class_="btn") }}
         </div>
     </form>
 </div>
+<div class="content-container">New User? <a href="{{ url_for('register') }}">Click to Register!</a></div>
 {% endblock %}
