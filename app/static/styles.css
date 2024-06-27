@@ -11,11 +11,15 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding-top: 120px;
     background: #f4f4f4;
 }
 
 nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background: #333;
     color: #fff;
     padding: 1rem 0;
@@ -25,6 +29,9 @@ nav .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%; /* Ensure the container spans the full width */
+    max-width: 1200px; /* Adjust as needed */
+    margin: 0 auto; /* Center the container horizontally */
 }
 
 nav h1 img {
@@ -133,7 +140,6 @@ footer {
     color: #fff;
     text-align: center;
     padding: 1rem 0;
-    position: fixed;
     bottom: 0;
     width: 100%;
 }
@@ -189,6 +195,15 @@ footer .container {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
+.profile-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -222,6 +237,17 @@ footer .container {
     color: #333;
 }
 
+.checkbox-columns {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.checkbox-column {
+    flex: 1 0 30%; /* Adjust the percentage to control the column width */
+    min-width: 150px; /* Minimum width to ensure readability */
+    padding: 10px;
+}
+
 .btn {
     background: #ff4757;
     color: #fff;
@@ -237,3 +263,4 @@ footer .container {
 .btn:hover {
     background: #e73c4b;
 }
+

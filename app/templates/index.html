@@ -6,8 +6,8 @@
 <div class="main-container">
     <div class="container">
         <h2>Welcome, {{ current_user.first_name }}!</h2>
-        <p>Find your perfect match today.</p>
-        <a href="#" class="get-started-btn">Get Started</a>
+        <p>Find your perfect match today, just click below to customize your bio and select your preferences.</p>
+        <a href="{{ url_for('profile') }}" class="get-started-btn">Complete Your Profile</a>
     </div>
 </div>
 {% else %}

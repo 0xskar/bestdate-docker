@@ -8,4 +8,80 @@
         <!-- Profile form goes here -->
     </div>
 </div>
+<div class="content-container">
+    <form method="POST" action="" class="profile-form">
+        {{ form.hidden_tag() }}
+        <!-- Flash messages block -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+                <div class="alert alert-danger"><span style="color: red;">{{ message }}</span></div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+        {% for field in form if field.name != 'submit' and field.type != 'CSRFTokenField' %}
+            {% if field.name == 'gender_preference' %}
+                <div class="form-group">
+                {{ form.gender_preference.label(class_='form-label') }}
+                <small class="form-text text-muted">Select the genders you are interested in matching with.</small>
+                <div class="checkbox-columns">
+                    {% for subfield in form.gender_preference %}
+                        <div class="checkbox-column">
+                            {{ subfield }} {{ subfield.label }}
+                        </div>
+                    {% endfor %}
+                </div>
+                </div>
+            {% elif field.name == 'politics' %}
+                <div class="form-group">
+                {{ form.politics.label(class_='form-label') }}
+                <small class="form-text text-muted">What politics do you align with?</small>
+                <div class="checkbox-columns">
+                    {% for subfield in form.politics %}
+                        <div class="checkbox-column">
+                            {{ subfield }} {{ subfield.label }}
+                        </div>
+                    {% endfor %}
+                </div>
+                </div>
+            {% elif field.name == 'handling_money' %}
+                <div class="form-group">
+                {{ form.handling_money.label(class_='form-label') }}
+                <small class="form-text text-muted">How do you handle money?</small>
+                <div class="checkbox-columns">
+                    {% for subfield in form.handling_money %}
+                        <div class="checkbox-column">
+                            {{ subfield }} {{ subfield.label }}
+                        </div>
+                    {% endfor %}
+                </div>
+                </div>
+            {% elif field.name == 'religion' %}
+                <div class="form-group">
+                {{ form.religion.label(class_='form-label') }}
+                <small class="form-text text-muted">Are you religious/What do you align with?</small>
+                    {{ field(class_='form-control') }}
+                </div>
+            {% else %}
+                <div class="form-group">
+                    {{ field.label(class_='form-label') }}
+                    {% if field.name == 'bio' %}
+                    <small class="form-text text-muted">Create a bio that lets others know what you're all about if they match with you (5000 Chars Max).</small>
+                    {{ field(class_='form-label', id='editor') }}
+                    {% else %}
+                    {{ field(class_='form-control') }}
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <div class="form-group">
+            {{ form.submit(class_="btn") }}
+        </div>
+
+    </form>
+</div>
+
 {% endblock %}
