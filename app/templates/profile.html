@@ -5,7 +5,6 @@
     <div class="container">
         <h2>Your Profile</h2>
         <p>Update your profile.</p>
-        <!-- Profile form goes here -->
     </div>
 </div>
 <div class="content-container">
@@ -22,19 +21,7 @@
         {% endif %}
         {% endwith %}
         {% for field in form if field.name != 'submit' and field.type != 'CSRFTokenField' %}
-            {% if field.name == 'gender_preference' %}
-                <div class="form-group">
-                {{ form.gender_preference.label(class_='form-label') }}
-                <small class="form-text text-muted">Select the genders you are interested in matching with.</small>
-                <div class="checkbox-columns">
-                    {% for subfield in form.gender_preference %}
-                        <div class="checkbox-column">
-                            {{ subfield }} {{ subfield.label }}
-                        </div>
-                    {% endfor %}
-                </div>
-                </div>
-            {% elif field.name == 'politics' %}
+            {% if field.name == 'politics' %}
                 <div class="form-group">
                 {{ form.politics.label(class_='form-label') }}
                 <small class="form-text text-muted">What politics do you align with?</small>

@@ -3,7 +3,7 @@ from markupsafe import Markup
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, DateField, SelectField, TextAreaField, Field, SelectMultipleField, widgets
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Optional
 from wtforms.widgets import Input, TextArea
-from config import GENDER_OPTIONS, HANDLING_MONEY_OPTIONS, POLITIC_OPTIONS, RELIGION_OPTIONS
+from config import GENDER_OPTIONS, HANDLING_MONEY_OPTIONS, POLITIC_OPTIONS, RELIGION_OPTIONS, SHOWERING_FREQUENCY_OPTIONS, ORAL_CARE_OPTIONS, CIGARETTE_SMOKING_OPTIONS, LIVING_SPACE_CLEANLINESS_OPTIONS, ALCHOHOL_COMSUMPTION_OPTIONS, MARIJUANA_CONSUMPTION_OPTIONS
 
 
 class LoginForm(FlaskForm):
@@ -47,30 +47,32 @@ class MultiCheckBoxField(SelectMultipleField):
     widget = widgets.ListWidget(prefix_label=False)
     option_widget = widgets.CheckboxInput()
 
+# Profile Customization Form
 class ProfileForm(FlaskForm):
-    gender_preference = MultiCheckBoxField('Gender Preferences', choices=GENDER_OPTIONS, validators=[Optional()])
     bio = StringField('Bio', widget=TextArea(), validators=[Optional(), Length(max=1000)])
     religion = SelectField('Religion', choices=RELIGION_OPTIONS, validators=[Optional()])
     politics = MultiCheckBoxField('Politics', choices=POLITIC_OPTIONS, validators=[Optional()])
     handling_money = MultiCheckBoxField('Handling Money', choices=HANDLING_MONEY_OPTIONS, validators=[Optional()])
-    hygiene = StringField('Hygiene', validators=[Optional()])
-    lifestyle_choices = StringField('Lifestyle Choices', validators=[Optional()])
+    # TODO Add in personal health
+    health_living_space_cleanliness = SelectField('How often do you clean house?', choices=LIVING_SPACE_CLEANLINESS_OPTIONS, validators=[Optional()])
+    health_showering_frequency = SelectField('Showering Frequency', choices=SHOWERING_FREQUENCY_OPTIONS, validators=[Optional()])
+    health_oral_care = SelectField('Oral Care', choices=ORAL_CARE_OPTIONS, validators=[Optional()])
+    health_smoking = SelectField('Tobacco smoking', choices=CIGARETTE_SMOKING_OPTIONS, validators=[Optional()])
+    health_alchohol_consumption = SelectField('Alchohol consumption', choices=ALCHOHOL_COMSUMPTION_OPTIONS, validators=[Optional()])
+    health_marijuana_consumption = SelectField('Alchohol consumption', choices=MARIJUANA_CONSUMPTION_OPTIONS, validators=[Optional()])
     submit = SubmitField('Update Profile')
 
+# Matchmaking selection form
 class ProfileMatchForm(FlaskForm):
-    religion_preference = StringField('Religion Preference', validators=[Optional()])
-    religion_weight = RangeField('Religion Weight', validators=[Optional()])
-    
-    politics_preference = StringField('Politics Preference', validators=[Optional()])
-    politics_weight = RangeField('Politics Weight', validators=[Optional()])
-    
-    handling_money_preference = StringField('Handling Money Preference', validators=[Optional()])
-    handling_money_weight = RangeField('Handling Money Weight', validators=[Optional()])
-    
-    hygiene_preference = StringField('Hygiene Preference', validators=[Optional()])
-    hygiene_weight = RangeField('Hygiene Weight', validators=[Optional()])
-    
-    lifestyle_choices_preference = StringField('Lifestyle Choices Preference', validators=[Optional()])
-    lifestyle_choices_weight = RangeField('Lifestyle Choices Weight', validators=[Optional()])
+    gender_preference = MultiCheckBoxField('Gender Preferences', choices=GENDER_OPTIONS, validators=[Optional()])
+    religion_preference = StringField('Religion Preference', choices=RELIGION_OPTIONS, validators=[Optional()])
+    politics_preference = StringField('Politics Preference', choices=POLITIC_OPTIONS, validators=[Optional()])
+    handling_money_preference = StringField('Handling Money Preference', choices=HANDLING_MONEY_OPTIONS, validators=[Optional()])
+    health_living_space_cleanliness_preference = SelectField('How often do you clean house?', choices=LIVING_SPACE_CLEANLINESS_OPTIONS, validators=[Optional()])
+    health_showering_frequency_preference = SelectField('Showering Frequency', choices=SHOWERING_FREQUENCY_OPTIONS, validators=[Optional()])
+    health_oral_care_preference = SelectField('Oral Care', choices=ORAL_CARE_OPTIONS, validators=[Optional()])
+    health_smoking_preference = SelectField('Tobacco smoking', choices=CIGARETTE_SMOKING_OPTIONS, validators=[Optional()])
+    health_alchohol_consumption_preference = SelectField('Alchohol consumption', choices=ALCHOHOL_COMSUMPTION_OPTIONS, validators=[Optional()])
+    health_marijuana_consumption_preference = SelectField('Alchohol consumption', choices=MARIJUANA_CONSUMPTION_OPTIONS, validators=[Optional()])
     submit = SubmitField('Update Matches')
 

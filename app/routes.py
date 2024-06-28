@@ -85,12 +85,17 @@ def profile():
     if form.validate_on_submit():
         # Update user fields with form data
         current_user.bio = form.bio.data
-        current_user.gender_preference = form.gender_preference.data
         current_user.religion = form.religion.data
         current_user.politics = form.politics.data
         current_user.handling_money = form.handling_money.data
-        current_user.hygiene = form.hygiene.data
-        current_user.lifestyle_choices = form.lifestyle_choices.data
+
+        # Update health fields
+        current_user.health_living_space_cleanliness = form.health_living_space_cleanliness.data
+        current_user.health_showering_frequency = form.health_showering_frequency.data
+        current_user.health_oral_care = form.health_oral_care.data
+        current_user.health_smoking = form.health_smoking.data
+        current_user.health_alchohol_consumption = form.health_alchohol_consumption.data
+        current_user.health_marijuana_consumption = form.health_marijuana_consumption.data
 
         db.session.commit()
         flash('Profile updated successfully!', 'success')
@@ -99,15 +104,19 @@ def profile():
     else:
         # Populate form with current user data
         form.bio.data = current_user.bio
-        form.gender_preference.data = current_user.gender_preference or []
         form.religion.data = current_user.religion
         form.politics.data = current_user.politics or []
         form.handling_money.data = current_user.handling_money or []
-        form.hygiene.data = current_user.hygiene or []
-        form.lifestyle_choices.data = current_user.lifestyle_choices or []
+
+        # Populate health fields
+        form.health_living_space_cleanliness.data = current_user.health_living_space_cleanliness
+        form.health_showering_frequency.data = current_user.health_showering_frequency
+        form.health_oral_care.data = current_user.health_oral_care
+        form.health_smoking.data = current_user.health_smoking
+        form.health_alchohol_consumption.data = current_user.health_alchohol_consumption
+        form.health_marijuana_consumption.data = current_user.health_marijuana_consumption
 
     return render_template("profile.html", title="Profile", form=form)
-
 
 
 @app.route("/matches")
