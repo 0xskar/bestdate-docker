@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     {% if request.path == url_for('profile') %}
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     {% endif %}
 </head>
 <body>
@@ -57,6 +59,10 @@
             removePlugins: 'image,imageupload,link,PasteFromOffice', 
         });
     </script>
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     {% endif %}
 </body>
 </html>

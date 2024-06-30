@@ -30,7 +30,7 @@ class User(UserMixin, db.Model):
     # Basic Information (registration)
     first_name: so.Mapped[str] = so.mapped_column(sa.String(64), nullable=False)
     last_name: so.Mapped[str] = so.mapped_column(sa.String(64), nullable=False)
-    profile_picture: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
+    profile_picture: so.Mapped[List[str]] = so.mapped_column(JSONEncodedList, nullable=False, default=[])
 
     # Personal Details (registration)
     date_of_birth: so.Mapped[datetime] = so.mapped_column(nullable=False)
@@ -51,19 +51,19 @@ class User(UserMixin, db.Model):
     health_alchohol_consumption: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
     health_marijuana_consumption: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
 
-    # Match Criteria
+    # Match Criteria Personal Preferences
     gender_preference: so.Mapped[List[str]] = so.mapped_column(JSONEncodedList, nullable=False, default=[])
-    religion_preference: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
-    politics_preference: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
-    handling_money_preference: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
+    religion_preference: so.Mapped[List[str]] = so.mapped_column(JSONEncodedList, nullable=False, default=[])
+    politics_preference: so.Mapped[List[str]] = so.mapped_column(JSONEncodedList, nullable=False, default=[])
+    handling_money_preference: so.Mapped[List[str]] = so.mapped_column(JSONEncodedList, nullable=False, default=[])
 
-    # Match Health Preferences
-    health_living_space_cleanliness_preference: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
-    health_showering_frequency_preference: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
-    health_oral_care_preference: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
-    health_smoking_preference: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
-    health_alchohol_consumption_preference: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
-    health_marijuana_consumption_preference: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
+    # Match Criteria Health Preferences
+    health_living_space_cleanliness_preference: so.Mapped[List[str]] = so.mapped_column(JSONEncodedList, nullable=False, default=[])
+    health_showering_frequency_preference: so.Mapped[List[str]] = so.mapped_column(JSONEncodedList, nullable=False, default=[])
+    health_oral_care_preference: so.Mapped[List[str]] = so.mapped_column(JSONEncodedList, nullable=False, default=[])
+    health_smoking_preference: so.Mapped[List[str]] = so.mapped_column(JSONEncodedList, nullable=False, default=[])
+    health_alchohol_consumption_preference: so.Mapped[List[str]] = so.mapped_column(JSONEncodedList, nullable=False, default=[])
+    health_marijuana_consumption_preference: so.Mapped[List[str]] = so.mapped_column(JSONEncodedList, nullable=False, default=[])
 
     # Activity
     last_login: so.Mapped[datetime] = so.mapped_column(default=datetime.now, nullable=False)
@@ -89,43 +89,6 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
-
-    # get null fields to populate user profile form
-    def get_null_fields(self):
-        null_fields = []
-        if not self.gender_preference:
-            null_fields.append('gender_preference')
-        if not self.bio:
-            null_fields.append('bio')
-        if not self.religion:
-            null_fields.append('religion')
-        if not self.politics:
-            null_fields.append('politics')
-        if not self.handling_money:
-            null_fields.append('handling_money')
-        if not self.health_showering_frequency:
-            null_fields.append('health_showering_frequency')
-        if not self.health_oral_care:
-            null_fields.append('health_oral_care')
-        if not self.health_smoking:
-            null_fields.append('health_smoking')
-        if not self.health_living_space_cleanliness:
-            null_fields.append('health_living_space_cleanliness')
-        if not self.religion_preference:
-            null_fields.append('religion_preference')
-        if not self.politics_preference:
-            null_fields.append('politics_preference')
-        if not self.handling_money_preference:
-            null_fields.append('handling_money_preference')
-        if not self.health_showering_frequency_preference:
-            null_fields.append('health_showering_frequency_preference')
-        if not self.health_oral_care_preference:
-            null_fields.append('health_oral_care_preference')
-        if not self.health_smoking_preference:
-            null_fields.append('health_smoking_preference')
-        if not self.health_living_space_cleanliness_preference:
-            null_fields.append('health_living_space_cleanliness_preference')
-        return null_fields
 
     # User loader function
     @login.user_loader

@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileSize, FileRequired
 from markupsafe import Markup
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, DateField, SelectField, TextAreaField, Field, SelectMultipleField, widgets
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Optional
@@ -49,17 +50,21 @@ class MultiCheckBoxField(SelectMultipleField):
 
 # Profile Customization Form
 class ProfileForm(FlaskForm):
+    profile_picture = FileField('Profile Picture', validators=[
+        Optional(),
+        FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!'),
+        FileSize(max_size=8 * 1024 * 1024)  # 8 MB
+    ])
     bio = StringField('Bio', widget=TextArea(), validators=[Optional(), Length(max=1000)])
     religion = SelectField('Religion', choices=RELIGION_OPTIONS, validators=[Optional()])
     politics = MultiCheckBoxField('Politics', choices=POLITIC_OPTIONS, validators=[Optional()])
     handling_money = MultiCheckBoxField('Handling Money', choices=HANDLING_MONEY_OPTIONS, validators=[Optional()])
-    # TODO Add in personal health
     health_living_space_cleanliness = SelectField('How often do you clean house?', choices=LIVING_SPACE_CLEANLINESS_OPTIONS, validators=[Optional()])
     health_showering_frequency = SelectField('Showering Frequency', choices=SHOWERING_FREQUENCY_OPTIONS, validators=[Optional()])
     health_oral_care = SelectField('Oral Care', choices=ORAL_CARE_OPTIONS, validators=[Optional()])
     health_smoking = SelectField('Tobacco smoking', choices=CIGARETTE_SMOKING_OPTIONS, validators=[Optional()])
-    health_alchohol_consumption = SelectField('Alchohol consumption', choices=ALCHOHOL_COMSUMPTION_OPTIONS, validators=[Optional()])
-    health_marijuana_consumption = SelectField('Alchohol consumption', choices=MARIJUANA_CONSUMPTION_OPTIONS, validators=[Optional()])
+    health_alchohol_consumption = SelectField('Alchohol', choices=ALCHOHOL_COMSUMPTION_OPTIONS, validators=[Optional()])
+    health_marijuana_consumption = SelectField('Marijuana', choices=MARIJUANA_CONSUMPTION_OPTIONS, validators=[Optional()])
     submit = SubmitField('Update Profile')
 
 # Matchmaking selection form

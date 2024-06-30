@@ -105,7 +105,9 @@ CIGARETTE_SMOKING_OPTIONS = [
 LIVING_SPACE_CLEANLINESS_OPTIONS = [
     ('daily_cleaning', 'Daily cleaning'),
     ('weekly_cleaning', 'Weekly cleaning'),
-    ('bi_weekly_cleaning', 'Bi-weekly cleaning')
+    ('bi_weekly_cleaning', 'Bi-weekly cleaning'),
+    ('monthly_cleaning', 'Clean monthly'),
+    ('infrequent_cleaning', 'Longer than every month')
 ]
 
 ALCHOHOL_COMSUMPTION_OPTIONS = [
@@ -128,3 +130,5 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environ.get('DATE_SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATE_DATABASE_URL') or "sqlite:///" + os.path.join(basedir, "app.db")
+    UPLOAD_EXTENSIONS = [".jpg", ".png"]
+    UPLOAD_PATH = "profile_uploads"

@@ -20,6 +20,7 @@
 </div>
 {% endif %}
 
+<div class="content-container">
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 <ul>
@@ -29,5 +30,6 @@
 </ul>
 {% endif %}
 {% endwith %}
+</div>
 
 {% endblock %}

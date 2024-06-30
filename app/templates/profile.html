@@ -8,7 +8,7 @@
     </div>
 </div>
 <div class="content-container">
-    <form method="POST" action="" class="profile-form">
+    <form method="POST" action="" class="profile-form" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <!-- Flash messages block -->
         {% with messages = get_flashed_messages() %}
@@ -20,6 +20,30 @@
         </div>
         {% endif %}
         {% endwith %}
+
+        <!-- Display existing profile pictures in a carousel -->
+        {% if current_user.profile_picture %}
+        <div id="carouselProfilePictures" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for picture in current_user.profile_picture %}
+                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <img src="{{ url_for('static', filename='profile_uploads/' ~ picture) }}" alt="Profile Picture" class="d-block w-100">
+                    <button type="submit" name="delete_picture" value="{{ picture }}" class="btn btn-danger">Delete</button>
+                </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselProfilePictures" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselProfilePictures" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        {% endif %}
+
+        <!-- Profile form fields -->
         {% for field in form if field.name != 'submit' and field.type != 'CSRFTokenField' %}
             {% if field.name == 'politics' %}
                 <div class="form-group">
@@ -51,6 +75,12 @@
                 <small class="form-text text-muted">Are you religious/What do you align with?</small>
                     {{ field(class_='form-control') }}
                 </div>
+            {% elif field.name == 'profile_picture' %}
+                <div class="form-group">
+                    {{ form.profile_picture.label(class_='form-label') }}
+                    <small class="form-text text-muted">Upload up to 8 profile pictures (Max 8 MB each).</small>
+                    {{ field(class_='form-control', multiple=True) }}
+                </div>
             {% else %}
                 <div class="form-group">
                     {{ field.label(class_='form-label') }}
@@ -67,7 +97,34 @@
         <div class="form-group">
             {{ form.submit(class_="btn") }}
         </div>
-
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const profilePictureInput = document.querySelector('input[name="profile_picture"]');
+                const previewContainer = document.createElement('div');
+                profilePictureInput.parentElement.appendChild(previewContainer);
+            
+                profilePictureInput.addEventListener('change', function() {
+                    previewContainer.innerHTML = ''; // Clear previous previews
+                    const files = profilePictureInput.files;
+            
+                    for (let i = 0; i < files.length; i++) {
+                        const file = files[i];
+                        const reader = new FileReader();
+            
+                        reader.onload = function(e) {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.style.width = '100px'; // Adjust as needed
+                            img.style.margin = '5px';
+                            previewContainer.appendChild(img);
+                        }
+            
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+        </script>
+            
     </form>
 </div>
 
